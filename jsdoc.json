@@ -1,0 +1,21 @@
+{
+  "plugins": ["plugins/markdown"],
+  "source": {
+    "include": ["src", "README.md"],
+    "includePattern": ".+\\.(js|mjs|cjs)$",
+    "excludePattern": "(^|\\/|\\\\)_",
+    "exclude": ["node_modules", "docs"]
+  },
+  "opts": {
+    "destination": "./docs",
+    "recurse": true,
+    "encoding": "utf8",
+    "readme": "./README.md"
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "sourceType": "module",
+  "tags": { "allowUnknownTags": true }
+}
