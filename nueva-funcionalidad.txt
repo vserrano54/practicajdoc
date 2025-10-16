@@ -1,0 +1,2 @@
+Nueva funcionalidad: permite exportar reportes en PDF.
+Beneficio: reduce tiempo manual y asegura formato consistente.
