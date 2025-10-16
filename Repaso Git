@@ -1,0 +1,123 @@
+Repaso Git
+
+1- Clona un repositorio existente :    
+* -  Abre la terminal y clona un repositorio existente desde GitHub. Puedes usar cualquier proyecto, tuyo o ajeno.
+
+git clone https://github.com/vserrano54/practicajdoc.git
+
+2- Crea una rama nueva "developer":              en un solo paso: git checkout -b developer
+	
+	git branch				Verificar en que Rame estas
+
+	git branch developer. 		Crear la nueva Rama
+
+	git checkout developer       moverse a la Rama developer
+
+**Añade un archivo nuevo (ej. nueva-funcionalidad.txt) y escribe un par de líneas explicando qué hace la nueva característica.
+
+	git branch	comprobar la Rama actual
+
+	cat > nueva-funcionalidad.txt <<'EOF'
+Nueva funcionalidad: permite exportar reportes en PDF.
+Beneficio: reduce tiempo manual y asegura formato consistente.
+EOF
+
+**Realiza un commit con el mensaje "Añadiendo nueva funcionalidad".
+
+	git status			Verifica el estado de tu repositorio
+
+	git add nueva-funcionalidad.txt			Añade el archivo al staging area o añade todo git add .
+
+	git commit -m "Añadiendo nueva funcionalidad"		Crea el commit con el mensaje
+
+**.  haz un push de la rama developer
+
+	git branch			Verifica que estás en la rama correcta
+
+	git push -u origin developer			Sube la rama al remoto
+
+	git branch -r					verificar que se subió
+
+3-  Fusiona la rama principal (main) en la nueva rama developer :
+	# 1) Trae lo último del remoto
+	git fetch origin
+
+	# 2) Cambia a tu rama de trabajo
+	git checkout developer
+
+	# 3) Verifica que no tengas cambios sin commit
+	git status
+
+	# 4) Fusiona la rama principal (del remoto) en developer
+	git merge origin/main
+	# (Si prefieres usar la rama local, asegúrate antes de actualizarla:
+	#   git checkout main && git pull && git checkout developer && git merge main)
+
+	# 5) Si hay conflictos, resuélvelos editando los archivos marcados
+	#    Luego márcalos como resueltos:
+	git add <archivo1> <archivo2>  # o 'git add .'
+
+	# 6) Completa el merge con un commit (si fue necesario por conflictos)
+	git commit -m "Merge main into developer: sincronizando últimos cambios"
+
+	# 7) Sube los cambios
+	git push
+
+***Cambia a la rama main
+	git checkout main
+
+	git branch			comprobar Rama
+
+*****Crea un nuevo archivo o modifica uno existente en main, realiza un commit y empuja los cambios a GitHub (de la rama principal)
+
+	git checkout main			Asegúrate de estar en main y al día
+	git pull origin main
+
+	Crea un archivo nuevo (opción A) o modifica uno existente (opción B)
+
+	echo "Actualización: documentación de la rama main." > notas-main.md
+
+	Revisa cambios, añade al staging y haz commit
+	
+	git status
+	git add .
+	git commit -m "docs(main): agregar/actualizar notas en main"
+
+
+	**Empuja a GitHub (rama principal)
+
+	git push origin main
+
+**Cambia de vuelta a la rama developer
+
+	git checkout developer
+	git branch.   					comprobar la Rama
+
+
+**Fusiona los cambios de main en tu nueva rama para asegurarte de que tu rama developer esté al día con la principal:
+
+	# 1) Asegúrate de tener todo actualizado desde remoto
+	git fetch origin
+
+	# 2) Actualiza tu rama main local con la última versión del remoto
+	git checkout main
+	git pull --ff-only origin main
+
+	# 3) Cambia a tu rama de trabajo
+	git checkout developer
+
+	# 4) Fusiona main dentro de developer
+	git merge --no-ff main
+
+
+*************************
+****Si hay conflictos,  resuélvelos y realiza un commit con los cambios.
+git status                # Ver qué archivos quedaron en conflicto
+ Realiza cambios en la rama developer
+# edita y resuelve los conflictos en tu editor
+git add <archivos_resueltos>
+git commit                # completa el merge (usa el mensaje por defecto o personalízalo)
+
+Sube también a GitHub la rama developer
+
+git push -u origin developer
